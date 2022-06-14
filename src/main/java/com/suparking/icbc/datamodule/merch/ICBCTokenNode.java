@@ -1,5 +1,6 @@
-package com.suparking.icbc.datamodule.ICBC;
+package com.suparking.icbc.datamodule.merch;
 
+import com.suparking.icbc.datamodule.ICBC.ICBCBaseNode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

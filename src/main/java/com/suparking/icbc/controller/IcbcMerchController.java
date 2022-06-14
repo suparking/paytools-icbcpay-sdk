@@ -173,7 +173,7 @@ public class IcbcMerchController {
     public static GenericResponse maintain(APIMainTainModel apiMainTainModel, String initPayStr) {
         IcbcPayProjectInfo projectInfo = IcbcPayController.getProjectInfo(initPayStr);
         if (!Optional.ofNullable(projectInfo).isPresent() || !projectInfo.getInitStatus()) {
-            return ResponseFormat.retParam(1004, ConstantData.MAIN_TAIL, ConstantData.PAY_CENTER_INFO);
+            return ResponseFormat.retParam(1004, ConstantData.ICBC_VENDOR_REGISTER, ConstantData.PAY_CENTER_INFO);
         }
         JSONObject retJsonObj = new JSONObject(1);
         JSONObject mainTainObj = new JSONObject();
@@ -194,8 +194,8 @@ public class IcbcMerchController {
                 retJsonObj.put("response", mainTainObj.getJSONObject("response"));
             }
         } catch (Exception ex) {
-            return ResponseFormat.retParam(1000, ConstantData.MAIN_TAIL, "子商户进件:maintail出现问题");
+            return ResponseFormat.retParam(1000, ConstantData.ICBC_VENDOR_REGISTER, "子商户进件:maintail出现问题");
         }
-        return ResponseFormat.retParam(200, ConstantData.MAIN_TAIL, retJsonObj);
+        return ResponseFormat.retParam(200, ConstantData.ICBC_VENDOR_REGISTER, retJsonObj);
     }
 }

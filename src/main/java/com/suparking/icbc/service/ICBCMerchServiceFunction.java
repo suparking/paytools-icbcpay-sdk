@@ -308,29 +308,9 @@ public class ICBCMerchServiceFunction {
                if (StringUtils.isEmpty(retJsonStr)) {
                    result.put("result_code", "20003");
                } else {
-                   JSONObject retJsonObj = JSON.parseObject(retJsonStr);
-                   if(!retJsonObj.containsKey("ICBC_API_RETCODE")||
-                           !retJsonObj.containsKey("ICBC_API_RETMSG")||
-                           0 != (Integer)retJsonObj.get("ICBC_API_RETCODE"))
-                   {
-                       result.put("result_code",retJsonObj.get("ICBC_API_RETCODE").toString());
-                       result.put("result_desc",retJsonObj.get("ICBC_API_RETMSG"));
-                   }
-                   else
-                   {
-                       if (!retJsonObj.containsKey("hostRspCode") ||
-                               !retJsonObj.containsKey("hostRspMsg") ||
-                               !((String)retJsonObj.get("hostRspCode")).contains("0000") ||
-                               !((String)retJsonObj.get("hostRspMsg")).contains("成功")) {
-                           result.put("result_code", retJsonObj.get("hostRspCode"));
-                           result.put("result_desc", retJsonObj.get("hostRspMsg"));
-                       } else {
-                           result.put("result_code", retJsonObj.get("hostRspCode"));
-                           result.put("result_desc", retJsonObj.get("hostRspMsg"));
-                           result.put("response",retJsonObj.get("response"));
-                       }
-                   }
+                   return JSON.parseObject(retJsonStr);
                }
+
            }
        } catch (Exception ex) {
            result.put("result_code", "20004");

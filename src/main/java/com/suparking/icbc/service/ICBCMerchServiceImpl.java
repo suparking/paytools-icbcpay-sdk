@@ -1,5 +1,6 @@
 package com.suparking.icbc.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.icbc.api.DefaultIcbcClient;
 import com.icbc.api.request.JftApiVendorInfoRegisterRequestV2;
@@ -176,11 +177,13 @@ public class ICBCMerchServiceImpl {
             if (response.isSuccess()) {
                result.put("result_code", "0000");
                result.put("result_desc", "成功");
-               result.put("msg_id", response.getMsgId());
-               result.put("outVendorId", response.getOutVendorId());
+               JSONObject tmp = new JSONObject();
+                tmp.put("msg_id", response.getMsgId());
+                tmp.put("outVendorId", response.getOutVendorId());
                // 1 新建 2 正常 3 冻结 4  销户
-               result.put("vendorStatus", response.getVendorStatus());
-               result.put("auditStatus", response.getAuditStatus());
+                tmp.put("vendorStatus", response.getVendorStatus());
+                tmp.put("auditStatus", response.getAuditStatus());
+                result.put("response", tmp);
 
             } else {
                 result.put("result_code", String.valueOf(response.getReturnCode()));
