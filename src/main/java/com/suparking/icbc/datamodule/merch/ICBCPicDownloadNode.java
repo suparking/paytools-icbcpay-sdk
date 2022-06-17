@@ -13,6 +13,5 @@ import lombok.NoArgsConstructor;
 public class ICBCPicDownloadNode extends ICBCBaseNode {
     private String appId;
     private String outVendorId;
-
     private String imageKey;
 }

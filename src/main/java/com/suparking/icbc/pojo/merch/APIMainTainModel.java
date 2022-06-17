@@ -82,4 +82,25 @@ public class APIMainTainModel {
     private String settAccMobile;
     private String retAccNo;
     private String retAccName;
+    private String wxName1;
+    private String wxTel1;
+    private String wxmcc1;
+    private String wxName2;
+    private String wxTel2;
+    private String wxmcc2;
+    private String subAppid1;
+    private String zfbMcc1;
+    private String zfbSourceId1;
+    private String zfbRateChanl1;
+    private String zfbMerCusttype1;
+    private String zfbMerCustnum1;
+    private String zfbMerCustSort1;
+    private String zfbMerCustCode1;
+    private String zfbMerCard1;
+    private String zfboperatortype1;
+    private String zfbservicephone1;
+    private String zfbcontact1;
+    private String zfbcontacttype1;
+    private String zfbmerchantremart1;
+    private String zfbaddress1;
 }

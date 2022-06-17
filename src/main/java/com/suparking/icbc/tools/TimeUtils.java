@@ -22,6 +22,18 @@ public class TimeUtils {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         return simpleDateFormat.format(System.currentTimeMillis());
     }
+
+    public static  String getQRCodeDate(String data)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = simpleDateFormat1.parse(data);
+            return simpleDateFormat.format(date1);
+        }catch (Exception e){
+            return null;
+        }
+    }
     public static String getQueryDateBeforeNDay(Integer day)
     {
         Date date = new Date();

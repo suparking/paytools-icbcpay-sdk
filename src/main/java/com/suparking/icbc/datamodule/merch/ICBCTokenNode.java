@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 public class ICBCTokenNode extends ICBCBaseNode {
     private String appId;
 
+    private String outVendorId;
+
     private String validTime;
 
     private String version;

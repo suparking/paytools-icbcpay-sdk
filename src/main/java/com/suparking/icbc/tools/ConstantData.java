@@ -40,10 +40,26 @@ public class ConstantData {
     public static final String WITH_DRAW = "withdraw";
     // 子商户进件
     public static final String ICBC_VENDOR_REGISTER = "Icbc-vendorRegister";
+    public static final String ICBC_VENDOR_MODIFY = "Icbc-vendorModify";
+    public static final String ICBC_VENDOR_INFO = "Icbc-vendorInfo";
+    public static final String ICBC_PIC_UPLOAD = "Icbc-picUpload";
+    public static final String ICBC_PIC_DOWNLOAD = "Icbc-picDownload";
     public static final String VERIFY_ACCT = "verifyacct";
     public static final String IMAGE_UPLOAD = "imageupload";
     public static final String MERCH_QUERY = "merch-query";
     public static final String DAY_BILL = "daybill";
+
+    // 对账
+    public static final String ICBC_TOKEN = "Icbc-token";
+    public static final String ICBC_PAY_DOWNLOAD = "Icbc-payDownload";
+    public static final String ICBC_PAY_FILEDOWNLOAD = "Icbc-payFileDownload";
+    public static final String PAY_FILE_DOWNLOAD_SUCCESS = "0000";
+    public static final String PAY_FILE_DOWNLOAD_PATH = "/opt/suparking/file/pay/";
+
+    // 进件类型
+    public static final String TRANSTYPE_REGIST = "2";
+    public static final String TRANSTYPE_UPDATE = "4";
+
     //ICBC 支付方式
     public static final String STLFLAG_GENERAL = "00";
     public static final String STLFLAG_SECURITY = "01";
