@@ -18,8 +18,8 @@ public class ProjectInfo {
     private String muchkey;
     // 网关公钥
     private String apiGwPublicKey;
-    // entryptKey
-    private String entryptKey;
+    // encryptKey
+    private String encryptKey;
 
     private String platformName;
     private String queryType;
@@ -42,7 +42,7 @@ public class ProjectInfo {
         stringJoiner.add("商户号: "+ getMerchantId());
         stringJoiner.add("密钥: "+ getMuchkey());
         stringJoiner.add("网关公钥: " + getApiGwPublicKey());
-        stringJoiner.add("加密KEY: " + getEntryptKey());
+        stringJoiner.add("应用加密Key: "+ getEncryptKey());
         stringJoiner.add("渠道编号:"+getChannelId());
         stringJoiner.add("一级商户ID:"+getIcbcAppId());
         if (Optional.ofNullable(getAbcNoSenseInfo()).isPresent()) {

@@ -42,11 +42,11 @@ public class PlatformLists {
         platformNode.setUrl(CommonUrl+"/api/jft/api/pay/qrcode/V2");
         addPlatformNode(platformNode.getPlatformId(),platformNode);
 
-        /** H5 聚合支付 微信/支付宝/数字人民币 */
+        /** H5 聚合支付 微信/支付宝/*/
         platformNode = new PlatformNode();
         platformNode.setPlatformId(ConstantData.BUTT_ICBC);
         platformNode.setScene("Icbc-jspay");
-        platformNode.setUrl(CommonUrl + "/ui/jft/ui/pay/h5/V3");
+        platformNode.setUrl(CommonUrl + "/api/jft/api/pay/add/h5/traceless/order/V2");
         addPlatformNode(platformNode.getPlatformId(), platformNode);
         
         /** 订单查询 */

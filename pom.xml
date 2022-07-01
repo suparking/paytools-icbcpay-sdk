@@ -86,49 +86,49 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>logging</artifactId>
             <version>1.2</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/commons-logging-1.2.jar</systemPath>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/src/lib/commons-logging-1.2.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>com.icbc</groupId>
             <artifactId>hsm-software-share</artifactId>
             <version>1.0.3</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/hsm-software-share-1.0.3.jar</systemPath>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/src/lib/hsm-software-share-1.0.3.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>com.icbc</groupId>
             <artifactId>icbc-api-sdk-cop</artifactId>
             <version>1.10.5</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/icbc-api-sdk-cop.jar</systemPath>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/src/lib/icbc-api-sdk-cop.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>com.icbc.api</groupId>
             <artifactId>icbc-api-sdk-cop-io</artifactId>
             <version>1.10.5</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/icbc-api-sdk-cop-io.jar</systemPath>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/src/lib/icbc-api-sdk-cop-io.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>cn.com.infosec</groupId>
             <artifactId>icbc-ca</artifactId>
             <version>2.0.0.7</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/icbc-ca.jar</systemPath>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/src/lib/icbc-ca.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>cn.com.infosec</groupId>
             <artifactId>InfosecCrypto_Java1_02_JDK14</artifactId>
             <version>1.4.1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/InfosecCrypto_Java1_02_JDK14+.jar</systemPath>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/src/lib/InfosecCrypto_Java1_02_JDK14+.jar</systemPath>-->
         </dependency>
     </dependencies>
 
 
     <build>
-        <finalName>IcbcPay</finalName>
+        <finalName>IcbcPay-V2.0</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

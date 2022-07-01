@@ -56,7 +56,7 @@ public class ICBCMerchServiceImpl {
             ICBCTokenNode icbcTokenNode = (ICBCTokenNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcTokenNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcTokenNode.getCharset(), icbcTokenNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcTokenNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcTokenNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
 
             TokenRequestV1 request = new TokenRequestV1();
             request.setServiceUrl(icbcTokenNode.getUrl());
@@ -214,7 +214,7 @@ public class ICBCMerchServiceImpl {
             ICBCPicUploadNode icbcPicUploadNode = (ICBCPicUploadNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcPicUploadNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcPicUploadNode.getCharset(), icbcPicUploadNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcPicUploadNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcPicUploadNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
 
             JftApiVendorInfoRegisterRequestV1 request = new JftApiVendorInfoRegisterRequestV1();
             request.setServiceUrl(icbcPicUploadNode.getUrl());
@@ -259,7 +259,7 @@ public class ICBCMerchServiceImpl {
             ICBCPicDownloadNode icbcPicDownloadNode = (ICBCPicDownloadNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcPicDownloadNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcPicDownloadNode.getCharset(), icbcPicDownloadNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcPicDownloadNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcPicDownloadNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
 
             JftApiVendorPicDownloadRequestV1 request = new JftApiVendorPicDownloadRequestV1();
             request.setServiceUrl(icbcPicDownloadNode.getUrl());
@@ -304,7 +304,7 @@ public class ICBCMerchServiceImpl {
             ICBCAccountSearchNode icbcAccountSearchNode = (ICBCAccountSearchNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcAccountSearchNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcAccountSearchNode.getCharset(), icbcAccountSearchNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcAccountSearchNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcAccountSearchNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
 
             JftApiVendorInfoQueryRequestV1 request = new JftApiVendorInfoQueryRequestV1();
             request.setServiceUrl(icbcAccountSearchNode.getUrl());
@@ -382,7 +382,7 @@ public class ICBCMerchServiceImpl {
             ICBCAccountRegisterNode icbcAccountRegisterNode = (ICBCAccountRegisterNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcAccountRegisterNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcAccountRegisterNode.getCharset(), icbcAccountRegisterNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcAccountRegisterNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcAccountRegisterNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             JftApiVendorInfoRegisterRequestV2 request = new JftApiVendorInfoRegisterRequestV2();
             request.setServiceUrl(icbcAccountRegisterNode.getUrl());
 
@@ -479,7 +479,7 @@ public class ICBCMerchServiceImpl {
             ICBCAccountChangeNode icbcAccountChangeNode = (ICBCAccountChangeNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcAccountChangeNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcAccountChangeNode.getCharset(), icbcAccountChangeNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcAccountChangeNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcAccountChangeNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
 
             JftApiVendorInfoModifyRequestV1 request = new JftApiVendorInfoModifyRequestV1();
             request.setServiceUrl(icbcAccountChangeNode.getUrl());

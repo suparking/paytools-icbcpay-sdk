@@ -81,9 +81,8 @@ public class ICBCServiceFunction {
         try {
             String icbc_native_order_url  = PlatformLists.getPlatformUrl(ConstantData.BUTT_ICBC,ConstantData.ICBC_ORDER);
             if(StringUtils.isNotBlank(icbc_native_order_url)) {
-                Map<String,String> urlMap = getUrls(icbc_native_order_url);
                 ICBCOrderNode icbcOrderNode = new ICBCOrderNode();
-                icbcOrderNode.setUrl(urlMap.get("url"));
+                icbcOrderNode.setUrl(icbc_native_order_url);
                 icbcOrderNode.setApp_id(projectInfo.getIcbcAppId());
                 icbcOrderNode.setMsg_id(String.valueOf(SnowflakeConfig.snowflakeId()));
                 icbcOrderNode.setFormat("json");
@@ -92,7 +91,7 @@ public class ICBCServiceFunction {
 
                 icbcOrderNode.setAppId(projectInfo.getIcbcAppId());
                 icbcOrderNode.setOutVendorId(projectInfo.getMerchantId());
-                icbcOrderNode.setOutUserId(apiOrderModel.getProjectOrderNo() + apiOrderModel.getTermInfo() + TimeUtils.getPayDate());
+                icbcOrderNode.setOutUserId(apiOrderModel.getProjectNo() + apiOrderModel.getTermInfo() + TimeUtils.getPayDate());
                 icbcOrderNode.setNotifyUrl(apiOrderModel.getNotifyUrl());
                 icbcOrderNode.setOutOrderId(globalOrder);
                 icbcOrderNode.setPayExpire(apiOrderModel.getTimeExpire());
@@ -116,6 +115,8 @@ public class ICBCServiceFunction {
                     }
                     result.put("out_trade_no",globalOrder);
                 }
+            } else {
+                result.put("result_code","20002");
             }
 
         }catch (Exception ex) {
@@ -137,9 +138,8 @@ public class ICBCServiceFunction {
         try {
             String icbc_h5_order_url  = PlatformLists.getPlatformUrl(ConstantData.BUTT_ICBC,ConstantData.ICBC_JSAPI_ORDER);
             if(StringUtils.isNotBlank(icbc_h5_order_url)) {
-                Map<String,String> urlMap = getUrls(icbc_h5_order_url);
                 ICBCJsOrderNode icbcJsOrderNode = new ICBCJsOrderNode();
-                icbcJsOrderNode.setUrl(urlMap.get("url"));
+                icbcJsOrderNode.setUrl(icbc_h5_order_url);
                 icbcJsOrderNode.setApp_id(projectInfo.getIcbcAppId());
                 icbcJsOrderNode.setMsg_id(String.valueOf(SnowflakeConfig.snowflakeId()));
                 icbcJsOrderNode.setFormat("json");
@@ -149,10 +149,9 @@ public class ICBCServiceFunction {
                 icbcJsOrderNode.setAppId(projectInfo.getIcbcAppId());
                 icbcJsOrderNode.setOutOrderId(globalOrder);
                 icbcJsOrderNode.setOutVendorId(projectInfo.getMerchantId());
-                icbcJsOrderNode.setOutUserId(apiOrderModel.getProjectOrderNo() + apiOrderModel.getTermInfo() + TimeUtils.getPayDate());
+                icbcJsOrderNode.setOutUserId(apiOrderModel.getProjectNo() + apiOrderModel.getTermInfo() + TimeUtils.getPayDate());
                 icbcJsOrderNode.setPayAmount(apiOrderModel.getTotalAmount());
                 icbcJsOrderNode.setPayType("01");
-                icbcJsOrderNode.setNotifyUrl(apiOrderModel.getNotifyUrl());
                 if (trade_type.equals(ConstantData.WETCHATMINI)) {
                    icbcJsOrderNode.setPayMode("01");
                 }
@@ -164,6 +163,7 @@ public class ICBCServiceFunction {
                     icbcJsOrderNode.setPayMode("02");
                 }
 
+                icbcJsOrderNode.setNotifyUrl(apiOrderModel.getNotifyUrl());
                 icbcJsOrderNode.setTrxChannel("03");
                 if (trade_type.equals(ConstantData.WETCHATMINI) || trade_type.equals(ConstantData.WETCHATOFFICAL)) {
                     icbcJsOrderNode.setTradeType(apiOrderModel.getTradetype());
@@ -202,13 +202,18 @@ public class ICBCServiceFunction {
                     result.put("result_code", retJsonObj.getString("result_code"));
                     result.put("result_desc", retJsonObj.getString("result_desc"));
                     if (retJsonObj.containsKey("result_code") && retJsonObj.containsKey("result_desc") && "0000".equals(retJsonObj.getString("result_code"))) {
-                        result.put("code_url", retJsonObj.getString("qrCode"));
+                        if (apiOrderModel.getTradetype().equals(ConstantData.ALIJSPAY)) {
+                            result.put("payInfo", retJsonObj.getString("payInfo"));
+                        }else {
+                            result.put("Prepayid",retJsonObj.get("prepayId"));
+                            result.put("payInfo",retJsonObj.get("payInfo"));
+                        }
                     }
                     result.put("out_trade_no",globalOrder);
                 }
-
+            } else {
+                result.put("result_code","20002");
             }
-
         }catch (Exception ex) {
             result.put("result_code","20004");
             result.put("result_desc",ex);
@@ -238,9 +243,8 @@ public class ICBCServiceFunction {
 
            String icbc_pay_url  = PlatformLists.getPlatformUrl(ConstantData.BUTT_ICBC,ConstantData.ICBC_PAY);
            if(StringUtils.isNotBlank(icbc_pay_url)) {
-               Map<String,String> urlMap = getUrls(icbc_pay_url);
                ICBCPayNode icbcPayNode = new ICBCPayNode();
-               icbcPayNode.setUrl(urlMap.get("url"));
+               icbcPayNode.setUrl(icbc_pay_url);
                icbcPayNode.setApp_id(projectInfo.getIcbcAppId());
                icbcPayNode.setMsg_id(String.valueOf(SnowflakeConfig.snowflakeId()));
                icbcPayNode.setFormat("json");
@@ -249,7 +253,7 @@ public class ICBCServiceFunction {
 
                icbcPayNode.setAppId(projectInfo.getIcbcAppId());
                icbcPayNode.setOutVendorId(projectInfo.getMerchantId());
-               icbcPayNode.setOutUserId(apiPayModel.getProjectOrderNo() + apiPayModel.getTermInfo() + TimeUtils.getPayDate());
+               icbcPayNode.setOutUserId(apiPayModel.getProjectNo() + apiPayModel.getTermInfo() + TimeUtils.getPayDate());
                icbcPayNode.setNotifyUrl(apiPayModel.getNotifyUrl());
                icbcPayNode.setOutOrderId(orderNo);
                icbcPayNode.setGoodsName(apiPayModel.getGoodsDesc());
@@ -344,9 +348,8 @@ public class ICBCServiceFunction {
         try{
             String icbc_refund_url  = PlatformLists.getPlatformUrl(ConstantData.BUTT_ICBC,ConstantData.ICBC_REFUND);
             if(StringUtils.isNotBlank(icbc_refund_url)) {
-                Map<String,String> urlMap = getUrls(icbc_refund_url);
                 ICBCRefundNode icbcRefundNode = new ICBCRefundNode();
-                icbcRefundNode.setUrl(urlMap.get("url"));
+                icbcRefundNode.setUrl(icbc_refund_url);
                 icbcRefundNode.setApp_id(projectInfo.getIcbcAppId());
                 icbcRefundNode.setMsg_id(String.valueOf(SnowflakeConfig.snowflakeId()));
                 icbcRefundNode.setFormat("json");
@@ -401,9 +404,8 @@ public class ICBCServiceFunction {
         try{
             String icbc_refundquery_url  = PlatformLists.getPlatformUrl(ConstantData.BUTT_ICBC,ConstantData.ICBC_REFUNDQUERY);
             if(StringUtils.isNotBlank(icbc_refundquery_url)) {
-                Map<String,String> urlMap = getUrls(icbc_refundquery_url);
                 ICBCRefundQueryNode icbcRefundQueryNode = new ICBCRefundQueryNode();
-                icbcRefundQueryNode.setUrl(urlMap.get("url"));
+                icbcRefundQueryNode.setUrl(icbc_refundquery_url);
                 icbcRefundQueryNode.setApp_id(projectInfo.getIcbcAppId());
                 icbcRefundQueryNode.setMsg_id(String.valueOf(SnowflakeConfig.snowflakeId()));
                 icbcRefundQueryNode.setFormat("json");
@@ -468,9 +470,8 @@ public class ICBCServiceFunction {
         try{
             String icbc_trade_query_url  = PlatformLists.getPlatformUrl(ConstantData.BUTT_ICBC,ConstantData.ICBC_ORDERQUERY);
             if(!icbc_trade_query_url.equals("")) {
-                Map<String,String> urlMap = getUrls(icbc_trade_query_url);
                 ICBCOrderQueryNode icbcOrderQueryNode = new ICBCOrderQueryNode();
-                icbcOrderQueryNode.setUrl(urlMap.get("url"));
+                icbcOrderQueryNode.setUrl(icbc_trade_query_url);
                 icbcOrderQueryNode.setApp_id(projectInfo.getIcbcAppId());
                 icbcOrderQueryNode.setMsg_id(String.valueOf(SnowflakeConfig.snowflakeId()));
                 icbcOrderQueryNode.setFormat("json");

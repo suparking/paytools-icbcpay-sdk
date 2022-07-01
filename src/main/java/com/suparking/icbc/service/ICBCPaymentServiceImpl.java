@@ -139,13 +139,15 @@ public class ICBCPaymentServiceImpl{
             ICBCOrderNode icbcOrderNode = (ICBCOrderNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcOrderNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcOrderNode.getCharset(), icbcOrderNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcOrderNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcOrderNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             JftApiPayGenPayOrderQrcodeRequestV2 request = new JftApiPayGenPayOrderQrcodeRequestV2();
             request.setServiceUrl(icbcOrderNode.getUrl());
             JftApiPayGenPayOrderQrcodeRequestV2.JftApiPayGenPayOrderQrcodeRequestV2Biz bizContent = new JftApiPayGenPayOrderQrcodeRequestV2.JftApiPayGenPayOrderQrcodeRequestV2Biz();
             bizContent.setAppId(icbcOrderNode.getAppId());
+            bizContent.setOutVendorId(icbcOrderNode.getOutVendorId());
             bizContent.setOutUserId(icbcOrderNode.getOutUserId());
             bizContent.setNotifyUrl(icbcOrderNode.getNotifyUrl());
+            bizContent.setOutOrderId(icbcOrderNode.getOutOrderId());
             bizContent.setGoodsName(icbcOrderNode.getGoodsName());
             bizContent.setTrxIp(icbcOrderNode.getTrxIp());
             bizContent.setTrxChannel(icbcOrderNode.getTrxChannel());
@@ -187,7 +189,9 @@ public class ICBCPaymentServiceImpl{
         try
         {
             ICBCJsOrderNode icbcJsOrderNode = (ICBCJsOrderNode) obj;
-            UiIcbcClient client = new UiIcbcClient(projectInfo.getIcbcAppId(), projectInfo.getMuchkey(), icbcJsOrderNode.getCharset());
+            DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcJsOrderNode.getSign_type(),
+                    projectInfo.getMuchkey(), icbcJsOrderNode.getCharset(), icbcJsOrderNode.getFormat(), projectInfo.getApiGwPublicKey(),
+                    icbcJsOrderNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             JftApiPayAddTracelessOrderForH5RequestV2 request = new JftApiPayAddTracelessOrderForH5RequestV2();
             request.setServiceUrl(icbcJsOrderNode.getUrl());
             JftApiPayAddTracelessOrderForH5RequestV2.JftApiPayAddTracelessOrderForH5V2Biz bizContent = new JftApiPayAddTracelessOrderForH5RequestV2.JftApiPayAddTracelessOrderForH5V2Biz();
@@ -213,7 +217,7 @@ public class ICBCPaymentServiceImpl{
             request.setBizContent(bizContent);
 
             JftApiPayAddTracelessOrderForH5ResponseV2 response = client.execute(request, icbcJsOrderNode.getMsg_id());
-            if (response.isSuccess()) {
+            if (response.getReturnCode() == 10100000) {
                 result.put("result_code", "0000");
                 result.put("result_desc", "成功");
                 JSONObject paySign = JSON.parseObject(response.getPaySign());
@@ -252,7 +256,7 @@ public class ICBCPaymentServiceImpl{
             ICBCPayNode icbcPayNode = (ICBCPayNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcPayNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcPayNode.getCharset(), icbcPayNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcPayNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcPayNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             JftApiPayQrcodeRequestV2 request = new JftApiPayQrcodeRequestV2();
             request.setServiceUrl(icbcPayNode.getUrl());
             JftApiPayQrcodeRequestV2.JftApiPayQrcodeRequestV2Biz bizContent = new JftApiPayQrcodeRequestV2.JftApiPayQrcodeRequestV2Biz();
@@ -300,7 +304,7 @@ public class ICBCPaymentServiceImpl{
             ICBCOrderQueryNode icbcOrderQueryNode = (ICBCOrderQueryNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcOrderQueryNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcOrderQueryNode.getCharset(), icbcOrderQueryNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcOrderQueryNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcOrderQueryNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             QueryOrderRequestV1 request = new QueryOrderRequestV1();
             request.setServiceUrl(icbcOrderQueryNode.getUrl());
             QueryOrderRequestV1.QueryOrderRequestV1Biz bizContent = new QueryOrderRequestV1.QueryOrderRequestV1Biz();
@@ -351,7 +355,7 @@ public class ICBCPaymentServiceImpl{
             ICBCRefundNode icbcRefundNode = (ICBCRefundNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcRefundNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcRefundNode.getCharset(), icbcRefundNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcRefundNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcRefundNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             RefundAcceptRequestV1 request = new RefundAcceptRequestV1();
             request.setServiceUrl(icbcRefundNode.getUrl());
             RefundAcceptRequestV1.RefundAcceptRequestV1Biz bizContent = new RefundAcceptRequestV1.RefundAcceptRequestV1Biz();
@@ -403,7 +407,7 @@ public class ICBCPaymentServiceImpl{
             ICBCRefundQueryNode icbcRefundQueryNode = (ICBCRefundQueryNode) obj;
             DefaultIcbcClient client = new DefaultIcbcClient(projectInfo.getIcbcAppId(), icbcRefundQueryNode.getSign_type(),
                     projectInfo.getMuchkey(), icbcRefundQueryNode.getCharset(), icbcRefundQueryNode.getFormat(), projectInfo.getApiGwPublicKey(),
-                    icbcRefundQueryNode.getEncrypt_type(), projectInfo.getEntryptKey(), "", "");
+                    icbcRefundQueryNode.getEncrypt_type(), projectInfo.getEncryptKey(), "", "");
             RefundQueryRequestV1 request = new RefundQueryRequestV1();
             request.setServiceUrl(icbcRefundQueryNode.getUrl());
             RefundQueryRequestV1.RefundQueryRequestV1Biz bizContent = new RefundQueryRequestV1.RefundQueryRequestV1Biz();

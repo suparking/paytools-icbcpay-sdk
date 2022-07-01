@@ -261,37 +261,6 @@ public class UuidAndMD5Utils {
         return null;
     }
     /**
-     * CCB 建设银行 加密使用
-     * @param map
-     * @return
-     */
-    public static String ccbVerityGwSign(Map<String,Object> map,String muchKey)
-    {
-        String  result = "";
-        try
-        {
-            List<Map.Entry<String,Object>> infoIds = new ArrayList<>(map.entrySet());
-            StringBuilder ccbSb = new StringBuilder();
-            for(Map.Entry<String,Object> info: infoIds)
-            {
-                String keys = info.getKey();
-                Object vals = info.getValue();
-                ccbSb.append(keys+"="+vals+"&");
-            }
-            // 去除 最后一个 &
-            result = ccbSb.toString();
-            result = result.substring(0,result.length()-1);
-            // 拿着 拼接完的 数据进行加密
-            COM.CCB.EnDecryptAlgorithm.MCipherEncryptor ccbEncryptor = new COM.CCB.EnDecryptAlgorithm.MCipherEncryptor(muchKey);
-            String entryptr = ccbEncryptor.doEncrypt(result);
-            if(entryptr != null && entryptr.length() > 0)
-                return entryptr;
-        }catch (Exception ex)
-        {
-        }
-        return null;
-    }
-    /**
      * 工行 icbc 签名,目前使用 工行提供的 秘钥
      * @param map
      * @return

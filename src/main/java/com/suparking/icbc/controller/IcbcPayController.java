@@ -4,7 +4,6 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileReader;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.icbc.api.internal.util.StringUtils;
 import com.suparking.icbc.datamodule.projectInfoImpl.IcbcPayProjectInfo;
 import com.suparking.icbc.pojo.APIOrderModel;
 import com.suparking.icbc.pojo.APIOrderQueryModel;
@@ -20,6 +19,7 @@ import com.suparking.icbc.tools.ConstantData;
 import com.suparking.icbc.tools.OrderManagerTool;
 import com.suparking.icbc.tools.ResponseFormat;
 import com.suparking.icbc.tools.TimeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,7 +91,7 @@ public class IcbcPayController {
                                     projectInfo.setApiGwPublicKey(tmpLine[1]);
                                 }
                                 if (tmpLine[0].equals("EncryptKey")) {
-                                    projectInfo.setEntryptKey(tmpLine[1]);
+                                    projectInfo.setEncryptKey(tmpLine[1]);
                                 }
                                 else if (tmpLine[0].equals("MuchKey")) {
                                     projectInfo.setMuchkey(tmpLine[1]);
@@ -258,7 +258,7 @@ public class IcbcPayController {
                 return ResponseFormat.retParam(10004, ConstantData.PAY, ConstantData.PAY_CENTER_INFO);
             }
             if (apiPayModel.getCreateIp() == null || apiPayModel.getCreateIp().equals("")) {
-                apiPayModel.setCreateIp("");
+                apiPayModel.setCreateIp("127.0.0.1");
             }
             if (apiPayModel.getTimeStart() == null || apiPayModel.getTimeStart().equals("")) {
                 return ResponseFormat.retParam(10004, ConstantData.PAY, ConstantData.PAY_CENTER_INFO);
@@ -373,6 +373,9 @@ public class IcbcPayController {
                 } else {
                     retJsonObj.put("trade_state", ConstantData.PAY_SUCCESS);
                 }
+            } else {
+                retJsonObj.put("result_code", payRet.getString("result_code"));
+                retJsonObj.put("result_desc", payRet.getString("result_desc"));
             }
         } catch (Exception ex) {
             String errorstr = "";
@@ -760,7 +763,7 @@ public class IcbcPayController {
                 return ResponseFormat.retParam(10004, ConstantData.ORDER, ConstantData.PAY_CENTER_INFO);
             }
             if (apiOrderModel.getCreateIp() == null || apiOrderModel.getCreateIp().equals("")) {
-                apiOrderModel.setCreateIp("");
+                apiOrderModel.setCreateIp("127.0.0.1");
             }
             if (apiOrderModel.getTimeStart() == null || apiOrderModel.getTimeStart().equals("")) {
                 return ResponseFormat.retParam(10004, ConstantData.ORDER, ConstantData.PAY_CENTER_INFO);
@@ -901,17 +904,9 @@ public class IcbcPayController {
                     retJsonObj.put("result_desc", orderRet.get("result_desc"));
                 }else
                 {
-                    if (trade_type.equals(ConstantData.ALIJSPAY))
-                    {
-                        retJsonObj.put("result_code", "0");
-                        retJsonObj.put("result_desc", orderRet.get("result_desc"));
-                        retJsonObj.put("payInfo", orderRet.get("payInfo"));
-                    }else
-                    {
-                        retJsonObj.put("result_code", "0");
-                        retJsonObj.put("result_desc", orderRet.get("result_desc"));
-                        retJsonObj.put("payInfo", orderRet.get("payInfo"));
-                    }
+                    retJsonObj.put("result_code", "0");
+                    retJsonObj.put("result_desc", orderRet.get("result_desc"));
+                    retJsonObj.put("payInfo", orderRet.get("payInfo"));
                     retJsonObj.put("out_trade_no",orderRet.get("out_trade_no"));
                 }
             }else
